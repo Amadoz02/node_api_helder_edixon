@@ -183,6 +183,7 @@ button:hover {
   border-style: solid;
   border-color: red;
 }
+
 select{
   display: block;
   width: 90%;
@@ -197,6 +198,7 @@ select{
 }
 input[type="radio"]{
   margin: 0px 15px;
+  width: 20px;
 }
 input[type="checkbox"]{
   margin: 0px;
@@ -206,11 +208,12 @@ input[type="checkbox"]{
   display: flex;
 }
 .form_control{
-  display: flex;
   justify-content: center;
   gap: 10px;
 }
 .form_politico{
+  margin-top: 10px;
+  display: flex;
   justify-content: start;
 }
 .form_lenguajesCheck{
@@ -220,8 +223,43 @@ input[type="checkbox"]{
 }
 .form_lenguaje{
   margin-left: 30px;
+  width: 60%;
 }
-
 .oculto{
   display: none;
+}
+.avisoError
+{
+  color: red;
+  font-size: 13px;
+}
+.form_detalle{
+  font-size: 13px;
+}
+.navegacion{
+  display: grid;
+  grid-template-columns: repeat(11,1fr);
+  width: 100vw;
+  border-bottom: 3px solid var(--sycamore);
+}
+.navegacion_boton{
+  padding: 10px;
+  border: 5px solid var(--heavyMetal);
+  background-color: var(--starship);
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+  color: var(--heavyMetal);
+  transition: 0.3s;
+}
+.navegacion_boton:hover{
+  background-color: var(--white);
+  color: var(--sycamore);
+  border: 5px solid var(--sycamore);
+}
+.navegacion_text{
+  margin: auto;
+  font-weight: bold;
+  font-size: larger;
+  color: var(--sycamore);
 }

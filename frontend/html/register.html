@@ -4,11 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eventos</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Registrer</title>
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
+  <div class="navegacion">
+    <a class="navegacion_boton" href="login.html">Logearse</a>
+    <a class="navegacion_boton" href="register.html">Registrarse</a>
+    <label class="navegacion_text"> Añadir:</label>
+    <a class="navegacion_boton" href="lenguajes.html">Lenguajes</a>
+    <a class="navegacion_boton" href="ciudades.html">Ciudades</a>
+    <a class="navegacion_boton" href="generos.html">Generos</a>
+    <label class=" navegacion_text"> Gestionar:</label>
+    <a class="navegacion_boton" href="gestUsuario.html">Usuarios</a>
+    <a class="navegacion_boton" href="gestLenguaje.html">Lenguajes</a>
+    <a class="navegacion_boton" href="gestCiudades.html">Ciudades</a>
+    <a class="navegacion_boton" href="gestGeneros.html">Generos</a>
+  </div>
   <header>
     <div class="container">
       <h1>Eventos</h1>
@@ -18,10 +31,10 @@
     <section>
       <div class="container">
         <div class="card">
-          <h2 class="center">Ingrese su datos de usuario</h2>
+          <h2 class="center">Ingrese su datos de Usuario</h2>
           <form action="#" novalidate>
             <div class="form_control">
-              <input type="text" name="usuario" placeholder="Nombre" autocomplete="off" autofocus required>
+              <input type="text" name="nombre" placeholder="Nombre" autocomplete="off" autofocus required>
             </div>
             <div class="form_control">
               <input type="text" name="apellido" placeholder="Apellido" autocomplete="off" required>
@@ -48,7 +61,8 @@
               <input type="password" name="contrasena" placeholder="Contraseña" autocomplete="off" required>
             </div>
             <div>
-              <label>Lenguajes de Programacion(minimo 3):</label>
+              <label>Lenguajes de Programacion:</label>
+              <div class="form_detalle">(minimo 3)</div>
               <div class="form_lenguaje">
                 <div class="form_lenguajesCheck">
                   <input type="checkbox" name="lenguaje[]" id="html" value="1" required>
@@ -85,13 +99,16 @@
               </div>
             </div>
             <div class="form_control">
-              <div class="form_radio">
-                <label for="hombre">Hombre</label>
-                <input type="radio" id="hombre" name="genero" value="1" required>
-              </div>
-              <div class="form_radio">
-                <label for="mujer">Mujer</label>
-                <input type="radio" id="mujer" name="genero" value="2" required>
+              <label>Generos:</label>
+              <div>
+                <div class="form_radio">
+                  <input type="radio" id="hombre" name="genero" value="1" required>
+                  <label for="hombre">Hombre</label>
+                </div>
+                <div class="form_radio">
+                  <input type="radio" id="mujer" name="genero" value="2" required>
+                  <label for="mujer">Mujer</label>
+                </div>
               </div>
             </div>
             <div class="form_control form_politico">
@@ -108,7 +125,7 @@
       </div>
     </section>
   </main>
-  <script type="module" src="appForm.js"></script>
+  <script type="module" src="../js/app.js"></script>
 </body>
 
 </html>

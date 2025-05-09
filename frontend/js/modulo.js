@@ -14,12 +14,16 @@ export const esValido = (e) => {
   const campo_radio = radios.find((radio) => radio.checked) || [];
   if (campo_radio.length === 0) {
     obj[radios[0].name] = "";
+    let errorRadios = radios[0].parentNode.parentNode;
+    errorRadios.classList.add("error");
   } else {
     obj[radios[0].name] = campo_radio.value;
   }
   const campo_checkbox = checkbox.filter((e) => e.checked);
   if (campo_checkbox.length < 3) {
     obj[checkbox[0].name] = "";
+    let errorCheckbox = checkbox[0].parentNode.parentNode;
+    errorCheckbox.classList.add("error");
   } else {
     obj[checkbox[0].name] = [...campo_checkbox].map(e => e.value);
   }
@@ -37,6 +41,7 @@ export const esValido = (e) => {
       case "SELECT":
         obj[campo.name] = campo.selectedIndex;
         if (campo.selectedIndex === 0) {
+          obj[campo.name] = "";
           campo.classList.add("error");
         }
       default:
