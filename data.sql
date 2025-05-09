@@ -1,73 +1,72 @@
-#Creamos si no existe el usuario john_tecnico2055 lo restringimos a solo peticiones en forma local y le asignamos la contraseña #Aprendiz2025
-CREATE USER IF NOT EXISTS "node_js"@"localhost" IDENTIFIED BY "Aprendiz2024";
+#root
 
-#Creamos la base de datos
-CREATE DATABASE node_sena CHARACTER SET utf8mb4;
+create user 'dom_EdixonDCT'@'localhost' identified by "ADSO";
+create database dom_EdixonDCT;
+grant all on dom_EdixonDCT.* to dom_EdixonDCT@localhost;
 
-#Asignamos la base de datos al usuario y le damos todos los permisos
-GRANT ALL PRIVILEGES ON node_sena.* TO "node_js"@"localhost";
+#user
 
-#Refrescamos los permisos de todo el sistema
-FLUSH PRIVILEGES;
+show databases;
 
+use dom_EdixonDCT;
 
-use node_sena;
+drop table if exists lenguaje_usuario;
+drop table if exists usuarios;
+drop table if exists generos;
+drop table if exists lenguajes;
+drop table if exists ciudades;
 
--- Crear la tabla 'categorias'
-CREATE TABLE categorias (
-  id INT AUTO_INCREMENT PRIMARY KEY, -- ID de la categoría (clave primaria)
-  nombre VARCHAR(255) NOT NULL, -- Nombre de la categoría
-  descripcion TEXT, -- Descripción opcional de la categoría
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de creación
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Fecha de actualización
+create table ciudades (
+    id int auto_increment,
+    nombre varchar(30),
+    primary key(id)
+);
+create table lenguajes (
+    id int auto_increment,
+    nombre varchar(30),
+    primary key(id)
+);
+create table generos (
+    id int auto_increment,
+    nombre varchar(30),
+    primary key(id)
 );
 
--- Crear la tabla 'productos'
-CREATE TABLE productos (
-  id INT AUTO_INCREMENT PRIMARY KEY, -- ID del producto (clave primaria)
-  nombre VARCHAR(255) NOT NULL, -- Nombre del producto
-  descripcion TEXT, -- Descripción opcional del producto
-  precio DECIMAL(10, 2), -- Precio del producto
-  categoria_id INT, -- Clave foránea que referencia a la tabla 'categorias'
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de creación
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Fecha de actualización
-  FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE SET NULL -- Establece la relación y comportamiento al eliminar una categoría
+create table usuarios (
+    id int auto_increment,
+    nombre varchar(30),
+    apellido varchar(30),
+    documento varchar(30),
+    telefono varchar(30),
+    usuario varchar(30),
+    contrasena varchar(30),
+    id_ciudad int,
+    id_genero int,
+    primary key(id),
+    foreign key (id_ciudad) references ciudades(id),
+	foreign key (id_genero) references generos(id)
 );
 
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    refresh_token TEXT
+create table lenguaje_usuario (
+    id_usuario int,
+    id_lenguaje int,
+    foreign key (id_usuario) references usuarios(id),
+    foreign key (id_lenguaje) references lenguajes(id)
 );
 
+insert into ciudades(nombre)
+values ('Giron'), ('Bucaramanga'), ('Floridablanca'),('Piedecuesta');
+insert into lenguajes(nombre) 
+values ('HTML'), ('CSS'), ('JavaScript'), ('PHP'), ('Java'), ('C#'), ('SQL'), ('Phyton');
+insert into generos(nombre)
+values ('Hombre'),('Mujer');
+insert into usuarios(nombre, apellido, documento, telefono, usuario, contrasena, id_ciudad,id_genero)
+values ('Edixon', 'Castillo', 3001234567, 123456789, 'edixon_dct', 'mi_contrasena_segura', 3,1);
+insert into lenguaje_usuario(id_usuario, id_lenguaje)
+values (1, 1), (1, 3), (1, 5);
 
-INSERT INTO categorias (nombre, descripcion) VALUES
-('Electrónica', 'Categoría para productos electrónicos'),
-('Ropa', 'Categoría para prendas de vestir'),
-('Alimentos', 'Categoría para productos alimenticios');
-
-
-INSERT INTO productos (nombre, descripcion, precio, categoria_id) VALUES
-('Smartphone', 'Teléfono inteligente con 64GB de almacenamiento', 499.99, 1),
-('Laptop', 'Portátil con pantalla de 15 pulgadas', 799.99, 1),
-('Camiseta', 'Camiseta de algodón para hombre', 19.99, 2),
-('Manzanas', 'Manzanas frescas de calidad', 5.99, 3);
-
-select * from categorias;
-select * from productos;
+select * from ciudades;
+select * from generos;
+select * from lenguajes;
 select * from usuarios;
-
-describe productos;
-select * from categorias where id = 2;
-select * from productos where  categoria_id = 2;
-
-
-SELECT p.id, p.nombre AS producto, p.descripcion, p.precio, c.nombre AS categoria
-FROM productos p
-JOIN categorias c ON p.categoria_id = c.id;
-
-SELECT c.id, c.nombre AS categoria, p.nombre AS producto
-FROM categorias c
-LEFT JOIN productos p ON c.id = p.categoria_id;
+select * from lenguaje_usuario;
